@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+	crossorigin="anonymous">
+</head>
+
+<body>
+	<nav
+		class="navbar navbar-expand-lg navbar-light bg-light border border-primary table ">
+		<div class="container-fluid">
+			<h5>
+				<a class="navbar-brand text-success" href="#">Spring Boot and
+					Spring JPA</a>
+			</h5>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link text-success"
+						th:href="@{/listar}">Listado de Registros</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<h5 th:text="${titulo}"
+			class="text-secondary border border-success border-top-0 text-success"></h5>
+		<p>
+			<a th:href="@{/form}" class="btn btn-primary btn-xs">Crear
+				Registro</a>
+		</p>
+		<div class="form-group row">
+			<form th:action="@{/procesar}" th:object="${registro}" method="post">
+				<div class="form-group row">
+					<table
+						class="table table-striped border border-primary table table-bordered">
+						<thead class="thead-light">
+							<tr>
+								<th class="text-success">Registro</th>
+								<th class="text-success">Nombres</th>
+								<th class="text-success">Apellidos</th>
+								<th class="text-success">Fecha Registro</th>
+								<th class="text-success">Procesado</th>
+								<th class="text-success">Editar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="registro: ${registros}">
+								<th th:text="${registro.id}"></th>
+								<th th:text="${registro.nombre}"></th>
+								<th th:text="${registro.apellido}"></th>
+								<th th:text="${registro.createAt}"></th>
+								<th th:text="${registro.procesado}"></th>
+								<th>
+								<select th:name="procesoSeleccionado" th:value="${registro.procesado}" class="text-success form-control">
+										<option th:value="true" th:text="True"></option>
+										<option th:value="false"th:text="False"></option>
+								</select>
+								</th>
+							</tr>
+						</tbody>
+					</table>
+			</form>
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" value="Procesar" class="btn btn-primary" />
+				</div>
+			</div>
+		</div>
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+			integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+			integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+			crossorigin="anonymous"></script>
+	</div>
+</body>
+</html>
